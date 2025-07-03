@@ -22,19 +22,9 @@ export class HomeComponent implements OnInit {
         this.users = data;
         console.log(this.users);
       });
-
-    this.getUser2().subscribe((data: any) => {
-      this.user2 = data;
-      console.log(this.user2);
-      });
   }
 
 getUsers() {
     return this.http.get(`${environment.apiUrl}/api/users`);
   }
-
-getUser2(){
-  return this.http.get(`${environment.apiUrl}/api/users/new`);
-  }
-
 }
