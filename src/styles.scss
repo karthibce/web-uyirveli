@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+.row.content {
+  height: 100vh;
+}
+
+.sidenav {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+.table-overflow {
+	width: 100%;
+    overflow-x: scroll;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); // Gray semi-transparent
+  z-index: 1040; // Below modal which is z-index: 1050
+}
+
+
+@media screen and (max-width: 767px) {
+  .row.content {
+    height: auto;
+  }
+}
