@@ -23,9 +23,21 @@
   z-index: 1040; // Below modal which is z-index: 1050
 }
 
+.nav-pills .nav-link.active {
+  background-color: #1f6d06 !important; /* change to any custom color */
+  color: #fff !important;
+}
+
+.nav-link {
+	color: #1f6d06 !important;
+}
 
 @media screen and (max-width: 767px) {
   .row.content {
     height: auto;
+  }
+  
+  .nav-link {
+	color: #fff !important;
   }
 }

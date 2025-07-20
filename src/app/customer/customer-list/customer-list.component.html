@@ -1,14 +1,14 @@
 <div class="d-flex justify-content-between mb-3 m-top30">
   <input type="text" class="form-control w-50" [(ngModel)]="searchText" (input)="onSearchChange()" placeholder="Search by phone">
-  <button class="btn btn-primary ms-3" (click)="openAddCustomer()">Add Customer</button>
+  <button class="btn btn-info ms-3" (click)="openAddCustomer()">Add Customer</button>
 </div>
 <div class="table-overflow">
   <table class="table table-striped">
     <thead>
     <tr>
       <th>ID</th><th>Name</th><th>Phone</th>
-      <th>Village</th><th>Block</th><th>District</th>
-      <th>Status</th><th>CreatedAt</th>
+      <th>Village</th><!--<th>Block</th>--><th>District</th>
+      <!--<th>Status</th>--><th>CreatedAt</th>
     </tr>
     </thead>
     <tbody>
@@ -17,15 +17,18 @@
       <td>{{ customer.CUS_CustomerName }}</td>
       <td>{{ customer.CUS_PhoneNumber }}</td>
       <td>{{ customer.CUS_Village }}</td>
-      <td>{{ customer.CUS_Block }}</td>
+      <!--<td>{{ customer.CUS_Block }}</td>-->
       <td>{{ customer.CUS_District }}</td>
-      <td>{{ customer.CUS_Status }}</td>
-     <td>{{ customer.CUS_CreatedAt | date: 'dd-MM-yyyy hh:mm a'}}</td>
+      <!--<td>{{ customer.CUS_Status }}</td>-->
+     <td>{{ customer.CUS_CreatedAt | date: 'dd-MM-yyyy'}}</td>
      <td>
-       <button class="btn btn-sm btn-primary me-2" (click)="openEditCustomer(customer)">Edit</button>
+       <button class="btn btn-sm btn-secondary me-2" (click)="openEditCustomer(customer)">Edit</button>
      </td>
      <td>
        <button class="btn btn-sm btn-danger" (click)="deleteCustomer(customer.CUS_CustomerID)">Delete</button>
+     </td>
+     <td>
+       <button class="btn btn-sm btn-success" (click)="deleteCustomer(customer.CUS_CustomerID)">Order</button>
      </td>
     </tr>
     </tbody>
