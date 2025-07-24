@@ -3,9 +3,9 @@ const cors = require('cors');
 const db = require('./db');
 const app = express();
 const port = 3000;
+
 app.use(cors());
 app.use(express.json());
-
 
 // API Route
 // ✅ POST login route
@@ -24,7 +24,6 @@ app.post('/api/login', (req, res) => {
     }
 
     if (results.length > 0) {
-      // You could also generate a token here
       res.json({ success: true, message: 'Login successful', user: results[0] });
     } else {
       res.status(401).json({ success: false, message: 'Invalid username or password' });
@@ -34,7 +33,6 @@ app.post('/api/login', (req, res) => {
 
 // ===================== Customers Services =====================
 
-// Get all customers
 app.get('/customers', (req, res) => {
   db.query('SELECT * FROM tbl_customer_info WHERE CUS_Status != "Deleted"', (err, results) => {
     if (err) return res.status(500).send(err);
@@ -42,7 +40,6 @@ app.get('/customers', (req, res) => {
   });
 });
 
-// Create new customer
 app.post('/customers', (req, res) => {
   const { CUS_CustomerName, CUS_PhoneNumber, CUS_Village, CUS_Block, CUS_District, CUS_CreatedBy } = req.body;
   const sql = `INSERT INTO tbl_customer_info
@@ -56,7 +53,6 @@ app.post('/customers', (req, res) => {
   });
 });
 
-// Soft delete customer
 app.delete('/customers/:id', (req, res) => {
   const id = req.params.id;
   const { CUS_LastModifiedBy } = req.body;
@@ -70,7 +66,6 @@ app.delete('/customers/:id', (req, res) => {
   });
 });
 
-// Update customer
 app.put('/customers/:id', (req, res) => {
   const id = req.params.id;
   const { CUS_CustomerName, CUS_PhoneNumber, CUS_Village, CUS_Block, CUS_District, CUS_LastModifiedBy, CUS_Status } = req.body;
@@ -94,13 +89,8 @@ app.put('/customers/:id', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Backend server running at http://localhost:${port}`);
-});
+// ===================== Order Items =====================
 
-
-// ===================== Order Items (Separate Service) =====================
-// Get all customers
 app.get('/order-items', (req, res) => {
   db.query('SELECT * FROM tbl_order_items WHERE OIT_Status != "Deleted"', (err, results) => {
     if (err) return res.status(500).send(err);
@@ -108,7 +98,6 @@ app.get('/order-items', (req, res) => {
   });
 });
 
-// Add Item to Existing Order
 app.post('/order-items', (req, res) => {
   const item = req.body;
   const sql = `INSERT INTO tbl_order_items (OIT_ORD_OrderID, OIT_PRD_ProductID, OIT_Quantity, OIT_Price, OIT_ItemAmount, OIT_Discount, OIT_TotalAmount, OIT_Status, OIT_CreatedBy)
@@ -130,7 +119,6 @@ app.post('/order-items', (req, res) => {
   });
 });
 
-// Update an Order Item
 app.put('/order-items/:id', (req, res) => {
   const id = req.params.id;
   const item = req.body;
@@ -153,7 +141,6 @@ app.put('/order-items/:id', (req, res) => {
   });
 });
 
-// Delete an Order Item
 app.delete('/order-items/:id', (req, res) => {
   const id = req.params.id;
   db.query('DELETE FROM tbl_order_items WHERE OIT_OrderItemID = ?', [id], (err) => {
@@ -162,7 +149,6 @@ app.delete('/order-items/:id', (req, res) => {
   });
 });
 
-// List Items for an Order
 app.get('/order-items/order/:orderId', (req, res) => {
   const orderId = req.params.orderId;
   db.query('SELECT * FROM tbl_order_items WHERE OIT_ORD_OrderID = ?', [orderId], (err, results) => {
@@ -170,3 +156,14 @@ app.get('/order-items/order/:orderId', (req, res) => {
     res.json(results);
   });
 });
+
+// ✅ Root route for render homepage
+app.get('/', (req, res) => {
+  res.send('✅ Uyirveli Backend API is Live!');
+});
+
+// 🔊 Start server
+app.listen(port, () => {
+  console.log(`Backend server running at http://localhost:${port}`);
+});
+ 
