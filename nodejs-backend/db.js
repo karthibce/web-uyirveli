@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 
 // MySQL Connection
 const db = mysql.createConnection({
-  host: 'srv123.main-hosting.eu', // or use Hostinger's actual host if provided (e.g., 'mysql.hostinger.in')
+  host: 'id-dci-web1632.main-hosting.eu', // or use Hostinger's actual host if provided (e.g., 'mysql.hostinger.in')
   user: 'u744752345_user',
   password: 'password123',
   database: 'u744752345_uyirveli',
