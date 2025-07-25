@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
   host: 'id-dci-web1632.main-hosting.eu', // or use Hostinger's actual host if provided (e.g., 'mysql.hostinger.in')
   user: 'u744752345_user',
-  password: 'password123',
+  password: 'KarthiAthi@123',
   database: 'u744752345_uyirveli',
   port: 3306
 });
